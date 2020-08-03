@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class Apprenants extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('apprenants', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->date('date_naissance');
+            $table->string('ville_origine');
+            $table->string('formation');
+            $table->string('etablissement_prec');
+            $table->string('photo');
+            $table->integer('tuteur_id')->index();
+            $table->timestamps();
+
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('apprenants');
+    }
+}
