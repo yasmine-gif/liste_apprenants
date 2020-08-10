@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Tuteur;
 
-class TuteursController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +23,7 @@ class TuteursController extends Controller
      */
     public function create()
     {
-        return view('tuteurs.tuteur');
+        //
     }
 
     /**
@@ -35,15 +34,7 @@ class TuteursController extends Controller
      */
     public function store(Request $request)
     {
-        $data=request()->validate([
-            'nomTuteur'=>['required','string'],
-            'profession'=>['required','string'],
-            'prenomTuteur'=>['required','string'],
-            'telephoneTuteur'=>['required','integer'],
-        ]);
-        Tuteur::create($data);
-        session()->flash('message', 'tuteur enregistrer avec succes!');
-        return redirect()->back();
+        //
     }
 
     /**

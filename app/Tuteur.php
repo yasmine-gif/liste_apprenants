@@ -9,6 +9,6 @@ class Tuteur extends Model
     protected $guarded=[];
 
     public function apprenants(){
-        return $this->hasMany('App/Apprenant');
+        return $this->hasMany('App\Apprenant');
     }
 }

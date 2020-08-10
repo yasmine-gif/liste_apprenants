@@ -22,26 +22,21 @@ Route::get('/', function () {
     return view('acceuil');
 });
 
-Route::get('enregistrer', function () {
-    return view('apprenants.enregistrer');
-});
-
-Route::get('liste', function () {
-    return view('apprenants.liste');
-});
-
-Route::get('contact', function () {
-    return view('contact');
-});
-Route::get('tuteur', function () {
-    return view('tuteurs.tuteur');
-});
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/apprenants', 'ApprenantsController@index');
-Route::get('/apprenants/enregistrer', 'ApprenantsController@create');
-Route::post('/apprenants', 'ApprenantsController@store');
+Route::get('/apprenants', 'ApprenantsController@index')->name('apprenants.liste');
+Route::get('/apprenants/formulaire', 'ApprenantsController@create')->name('apprenant.enregistrer');
+Route::post('/apprenants/enregistrer', 'ApprenantsController@store')->name('apprenant.valider');
+
+Route::get('/apprenants/details/{id}', 'ApprenantsController@show')->name('apprenants.details');
+Route::get('/apprenants/modifier/{id}', 'ApprenantsController@modifier')->name('apprenant.modifier');
+Route::put('/apprenants/modifier/{id}', 'ApprenantsController@update')->name('apprenant.update');
+Route::delete('/apprenants/supprimer/{id}', 'ApprenantsController@destroy')->name('apprenant.delete');
+
+Route::get('/tuteurs', 'TuteursController@index')->name('tuteur.liste');
+Route::get('/tuteurs/formulaire', 'TuteursController@create')->name('tuteur.enregistrer');
+Route::post('/tuteurs/enregitrer', 'TuteursController@store')->name('tuteur.valider');
+
+Route::get('/contacts', 'ContactController@index')->name('contact');

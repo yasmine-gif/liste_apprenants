@@ -15,9 +15,9 @@ class Tuteurs extends Migration
     {
         Schema::create('tuteurs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->integer('contact');
+            $table->string('nomTuteur');
+            $table->string('prenomTuteur');
+            $table->integer('telephoneTuteur');
             $table->string('profession');
             $table->timestamps();
     

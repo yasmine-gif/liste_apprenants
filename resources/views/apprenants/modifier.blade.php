@@ -8,8 +8,10 @@
    
    <div class="le-div-general-du-formulaire">   
    
- <form action="{{route('apprenant.valider')}}" method="POST" class="formulaire" enctype="multipart/form-data">
+ <form action="{{route('apprenant.modifier',['id'=>$apprenant->id])}}" method="POST" class="formulaire" enctype="multipart/form-data">
  @csrf
+
+ @method('PUT')
    <div class="div-du-sous-titre-parent-et-des-tirest">
    <div class="row la-ligne-blanche">
   <div class=" col les-tirest"></div>
@@ -25,7 +27,7 @@
      <div class="les-champs-du-formulaire"> 
       <div class="row champ">
      <div class="col ">
-     <input id="nomApprenant" type="text" class="form-control {{ $errors->has('nomApprenant')?' is-invalid' : ''}}" placeholder="Nom" name="nomApprenant" >
+     <input id="nomApprenant" type="text" value="{{$apprenant->nomApprenant}}" class="form-control {{ $errors->has('nomApprenant')?' is-invalid' : ''}}" placeholder="Nom" name="nomApprenant" >
      @if($errors->has('nomApprenant'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('nomApprenant')}}</strong>
@@ -33,7 +35,7 @@
   @endif
     </div>
      <div class="col">
-     <input id="ville" type="text" class="form-control {{ $errors->has('ville')?' is-invalid' : ''}}" placeholder="Ville d'origine" name="ville" >
+     <input id="ville" type="text" value="{{$apprenant->ville}}" class="form-control {{ $errors->has('ville')?' is-invalid' : ''}}" placeholder="Ville d'origine" name="ville" >
      @if($errors->has('ville'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('ville')}}</strong>
@@ -43,7 +45,7 @@
     </div>
     <div class="row champ">
     <div class="col">
-      <input id="prenomApprenant" type="text" class="form-control {{ $errors->has('prenomApprenant')?' is-invalid' : ''}}" placeholder="Prenom" name="prenomApprenant" >
+      <input id="prenomApprenant" type="text" value="{{$apprenant->prenomApprenant}}" class="form-control {{ $errors->has('prenomApprenant')?' is-invalid' : ''}}" placeholder="Prenom" name="prenomApprenant" >
       @if($errors->has('prenomApprenant'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('prenomApprenant')}}</strong>
@@ -58,7 +60,7 @@
                             <?php $i=0; ?>
                            @foreach($tuteurs as $tuteur)
                            <?php $i++; ?>
-                            <option value="{{$tuteur->id}}">{{$i}}. {{$tuteur->nomTuteur}} {{$tuteur->prenomTuteur}}</option>
+                            <option {{$tuteur->id == $apprenant->tuteur_id ?'selected' :''}} value="{{$tuteur->id}}">{{$i}}. {{$tuteur->nomTuteur}} {{$tuteur->prenomTuteur}}</option>
                             @endforeach
                             </select>
                         
@@ -73,7 +75,7 @@
     </div>
     <div class="row champ">
       <div class="col">
-      <input id="dateDeNaissance" type="date" class="form-control {{ $errors->has('dateDeNaissance')?' is-invalid' : ''}}" placeholder="Date de naissance" name="dateDeNaissance" >
+      <input id="dateDeNaissance" type="date" value="{{$apprenant->dateDeNaissance}}" class="form-control {{ $errors->has('dateDeNaissance')?' is-invalid' : ''}}" placeholder="Date de naissance" name="dateDeNaissance" >
       @if($errors->has('dateDeNaissance'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('dateDeNaissance')}}</strong>
@@ -81,7 +83,7 @@
   @endif
     </div>
       <div class="col">
-       <input id="formation" type="text" class="form-control {{ $errors->has('formation')?' is-invalid' : ''}}" placeholder="Formation d'origine" name="formation" >
+       <input id="formation" type="text" value="{{$apprenant->formation}}" class="form-control {{ $errors->has('formation')?' is-invalid' : ''}}" placeholder="Formation d'origine" name="formation" >
        @if($errors->has('formation'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('formation')}}</strong>
@@ -91,7 +93,7 @@
       </div>
     <div class="row champ">
       <div class="col">
-       <input id="lieuDeNaissance" type="text" class="form-control {{ $errors->has('lieuDeNaissance')?' is-invalid' : ''}}" placeholder="Lieu de naisance" name="lieuDeNaissance">
+       <input id="lieuDeNaissance" type="text" value="{{$apprenant->lieuDeNaissance}}" class="form-control {{ $errors->has('lieuDeNaissance')?' is-invalid' : ''}}" placeholder="Lieu de naisance" name="lieuDeNaissance">
        @if($errors->has('lieuDeNaissance'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('lieuDeNaissance')}}</strong>
@@ -99,7 +101,7 @@
   @endif
       </div>
         <div class="col">
-        <input id="etablissement" type="tel" class="form-control {{ $errors->has('etablissement')?' is-invalid' : ''}}" placeholder="Etablissement precedent" name="etablissement">
+        <input id="etablissement" type="tel" value="{{$apprenant->etablissement}}" class="form-control {{ $errors->has('etablissement')?' is-invalid' : ''}}" placeholder="Etablissement precedent" name="etablissement">
         @if($errors->has('etablissement'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('etablissement')}}</strong>

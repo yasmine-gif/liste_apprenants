@@ -8,7 +8,7 @@ class Apprenant extends Model
 {
     protected $guarded=[];
 
-    public function tuteurs(){
-        return $this->belongsTo('App/Tuteur');
+    public function tuteur(){
+        return $this->belongsTo('App\Tuteur');
     }
 }

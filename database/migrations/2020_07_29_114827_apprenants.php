@@ -15,12 +15,13 @@ class Apprenants extends Migration
     {
         Schema::create('apprenants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->date('date_naissance');
-            $table->string('ville_origine');
+            $table->string('nomApprenant');
+            $table->string('prenomApprenant');
+            $table->date('dateDeNaissance');
+            $table->string('ville');
             $table->string('formation');
-            $table->string('etablissement_prec');
+            $table->string('etablissement');
+            $table->string('lieuDeNaissance');
             $table->string('photo');
             $table->integer('tuteur_id')->index();
             $table->timestamps();

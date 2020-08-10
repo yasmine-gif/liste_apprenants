@@ -29,7 +29,7 @@ class ApprenantsController extends Controller
     {
         $apprenants=Apprenant::get();
         $tuteurs=Tuteur::get();
-        return view('apprenants.enregistrement',compact('apprenants','tuteurs'));
+        return view('apprenants.enregistrer',compact('apprenants','tuteurs'));
     }
 
     /**
@@ -38,30 +38,37 @@ class ApprenantsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function modifier(int $id){
+        $tuteurs=Tuteur::get();
+        $apprenant=Apprenant::find($id);
+        return view('apprenants.modifier',compact('apprenant','tuteurs'));
+    }
     public function store(Request $request)
     {
         $data=request()->validate([
-            'nom'=> ['required','string'],
-            'prenom'=> ['required','string'],
-            'date_naissance'=> ['required','date'],
-            'ville_origine'=> ['required','string'],
+            'nomApprenant'=> ['required','string'],
+            'prenomApprenant'=> ['required','string'],
+            'dateDeNaissance'=> ['required','date'],
+            'ville'=> ['required','string'],
             'formation'=> ['required','string'],
-            'etablissement_prec'=> ['required','string'],
+            'lieuDeNaissance'=> ['required','string'],
             'photo'=> ['required','image'],
+            'etablissement'=> ['required','string'],
             'tuteur_id'=> ['required','string'],
         ]);
         $imagePath=request('photo')->store('uploads','public');
         $apprenants=Apprenant::create([
-            'nom'=> $data['nom'],
-            'prenom'=> $data['prenom'],
-            'date_naissance'=> $data['date_naissance'],
-            'ville_origine'=> $data['ville_origine'],
+            'nomApprenant'=> $data['nomApprenant'],
+            'prenomApprenant'=> $data['prenomApprenant'],
+            'dateDeNaissance'=> $data['dateDeNaissance'],
+            'ville'=> $data['ville'],
             'formation'=> $data['formation'],
-            'etablissement_prec'=> $data['etablissement_prec'],
+            'lieuDeNaissance'=> $data['lieuDeNaissance'],
             'photo'=> $imagePath,
+            'etablissement'=> $data['etablissement'],
             'tuteur_id'=> $data['tuteur_id'],
         ]);
-        return redirect()->route('apprenants.index');
+        return redirect()->route('apprenants.liste');
     }
 
     /**
@@ -94,8 +101,27 @@ class ApprenantsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   $apprenant=Apprenant::find($id);
+        $data=request()->validate([
+            'nomApprenant'=> ['required','string'],
+            'prenomApprenant'=> ['required','string'],
+            'dateDeNaissance'=> ['required','date'],
+            'ville'=> ['required','string'],
+            'formation'=> ['required','string'],
+            'lieuDeNaissance'=> ['required','string'],
+            'etablissement'=> ['required','string'],
+            'tuteur_id'=> ['required','string'],
+        ]);
+        
+     if($request['photo']){
+        $imagePath=request('photo')->store('uploads','public');
+     } else{
+        $apprenant->update($data);
+     }
+
+        return redirect()->route('apprenants.liste');
+
+
     }
 
     /**
