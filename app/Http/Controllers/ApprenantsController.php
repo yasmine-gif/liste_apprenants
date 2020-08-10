@@ -79,7 +79,8 @@ class ApprenantsController extends Controller
      */
     public function show($id)
     {
-        //
+        $apprenant=Apprenant::find($id);
+        return view('apprenants.detail',compact('apprenant'));
     }
 
     /**
@@ -132,6 +133,8 @@ class ApprenantsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $apprenant=Apprenant::find($id);
+        $apprenant->delete();
+        return redirect()->route('apprenants.liste');
     }
 }

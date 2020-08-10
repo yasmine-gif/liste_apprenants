@@ -14,10 +14,10 @@
     <th>NOM</th>
     <th>PRENOM</th>
     <th>DATE DE NAISSANCE</th>
-    <th>LIEU DE NAISSANCE</th>
-    <th>VILLE D'ORIGINE</th>
-    <th>ETABLISSEMENT D'ORIGINE</th>
+    <th>VILLE</th>
     <th>FORMATION D'ORIGINE</th>
+    <th>LIEU DE NAISSANCE</th>
+    <th>ETABLISSEMENT PRECEDENT</th>
     <th>TUTEUR</th>
     <th>DETAILS</th>
     <th>MODIFIER</th>
@@ -31,15 +31,15 @@
         <td>{{$apprenant->nomApprenant}}</td>
         <td>{{$apprenant->prenomApprenant}}</td>
         <td>{{$apprenant->dateDeNaissance}}</td>
-        <td>{{$apprenant->lieuDeNaissance}}</td>
         <td>{{$apprenant->ville}}</td>
-        <td>{{$apprenant->etablissement}}</td>
         <td>{{$apprenant->formation}}</td>
+        <td>{{$apprenant->lieuDeNaissance}}</td>
+        <td>{{$apprenant->etablissement}}</td>
         <td>{{$apprenant->tuteur->nomTuteur}}   {{$apprenant->tuteur->prenomTuteur}}</td>  
-        <td><a href="" class="btn btn-primary">DETAILS</a></td>  
+        <td><a href="{{route('apprenants.details',['id'=>$apprenant->id])}}" class="btn btn-primary">DETAILS</a></td>  
         <td><a href="{{route('apprenant.modifier',['id'=>$apprenant->id])}}" class="btn btn-info">MODIFIER</a></td> 
         <td>
-            <form onsubmit="return corfirm(Voulez-vous vraiment supprimer?')" action="
+            <form onsubmit="return confirm('Voulez-vous vraiment supprimer?')" action="
             {{route('apprenant.delete',['id'=>$apprenant->id])}}" method="post">
             @csrf
             {{method_field('DELETE')}}
